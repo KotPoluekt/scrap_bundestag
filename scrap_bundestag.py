@@ -1,3 +1,5 @@
+import time
+
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -41,7 +43,7 @@ with open('persons_url_list.txt') as file:
 
         soup = BeautifulSoup(result, 'lxml')
 
-        t = soup.find(class_='bt-bild-info-icon')
+        t = soup.find(class_='bt-biografie-name')
         t2 = t.find('h3')
         person = t2.text
         person_name_company = person.strip().split(',')
@@ -65,5 +67,7 @@ with open('persons_url_list.txt') as file:
 
         data_dict.append(data)
 
-        with open('result.json', 'a') as json_file:
-            json.dump(data_dict, json_file, indent=4)
+        time.sleep(2)
+
+with open('result.json', 'a') as json_file:
+    json.dump(data_dict, json_file, indent=4)
